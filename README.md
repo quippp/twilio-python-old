@@ -5,15 +5,14 @@
 A module for using the Twilio REST API and generating valid
 [TwiML](http://www.twilio.com/docs/api/twiml/ "TwiML -
 Twilio Markup Language"). [Click here to read the full
-documentation.](http://readthedocs.org/docs/twilio-python/en/latest/ "Twilio
-Python library documentation")
+documentation.][documentation]
 
 ## Installation
 
 Install from PyPi using [pip](http://www.pip-installer.org/en/latest/), a
 package manager for Python.
 
-    pip install twilio
+    pip install twilio==6.0.0rc2
 
 Don't have pip installed? Try installing it, by running this from the command
 line:
@@ -28,25 +27,31 @@ source code") for `twilio-python`, and then run:
 
 You may need to run the above commands with `sudo`.
 
+### Migrate from 5.x
+[Upgrade Guide][upgrade]
+
+## Documentation
+[Here][documentation]
+
 ## Getting Started
 
 Getting started with the Twilio API couldn't be easier. Create a
-`TwilioRestClient` and you're ready to go.
+`Client` and you're ready to go.
 
 ### API Credentials
 
-The `TwilioRestClient` needs your Twilio credentials. You can either pass these
+The `Twilio` needs your Twilio credentials. You can either pass these
 directly to the constructor (see the code below) or via environment variables.
 
 ```python
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 
 account = "ACXXXXXXXXXXXXXXXXX"
 token = "YYYYYYYYYYYYYYYYYY"
-client = TwilioRestClient(account, token)
+client = Client(account, token)
 ```
 
-Alternately, a `TwilioRestClient` constructor without these parameters will
+Alternately, a `Client` constructor without these parameters will
 look for `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` variables inside the
 current environment.
 
@@ -56,18 +61,18 @@ somewhere public.
 
 
 ```python
-from twilio.rest import TwilioRestClient
-client = TwilioRestClient()
+from twilio.rest import Client
+client = Client()
 ```
 
 ### Make a Call
 
 ```python
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 
 account = "ACXXXXXXXXXXXXXXXXX"
 token = "YYYYYYYYYYYYYYYYYY"
-client = TwilioRestClient(account, token)
+client = Client(account, token)
 
 call = client.calls.create(to="9991231234",
                            from_="9991231234",
@@ -78,11 +83,11 @@ print(call.sid)
 ### Send an SMS
 
 ```python
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 
 account = "ACXXXXXXXXXXXXXXXXX"
 token = "YYYYYYYYYYYYYYYYYY"
-client = TwilioRestClient(account, token)
+client = Client(account, token)
 
 message = client.messages.create(to="+12316851234", from_="+15555555555",
                                  body="Hello there!")
@@ -116,8 +121,7 @@ If you've instead found a bug in the library or would like new features added, g
 ### Digging Deeper
 
 The full power of the Twilio API is at your fingertips. The [full
-documentation](http://readthedocs.org/docs/twilio-python/en/latest/ "Twilio
-Python library documentation") explains all the awesome features available to
+documentation][documentation] explains all the awesome features available to
 use.
 
 * [Retrieve Call Records][calls]
@@ -132,3 +136,6 @@ use.
 [recordings]: http://twilio-python.readthedocs.org/en/latest/usage/recordings.html#listing-your-recordings
 [messages]: http://twilio-python.readthedocs.org/en/latest/usage/messages.html#retrieving-sent-messages
 [calls]: http://twilio-python.readthedocs.org/en/latest/usage/phone-calls.html#retrieve-a-call-record
+[issues]: https://github.com/twilio/twilio-python/issues
+[documentation]: http://twilio-python.readthedocs.org/en/release-6x/
+[upgrade]: https://github.com/twilio/twilio-python/wiki/Python-Version-6.x-Upgrade-Guide
